@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NuGet.LatestVersionExtension", "NuGet.LatestVersionExtension\NuGet.LatestVersionExtension.csproj", "{AFB3278E-1E94-4B13-8799-64BC38852CEB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NuGet.LatestPackagesExtension", "NuGet.LatestPackagesExtension\NuGet.LatestPackagesExtension.csproj", "{AFB3278E-1E94-4B13-8799-64BC38852CEB}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{A6320D9C-3C7C-478E-911F-A747BD91CD53}"
 	ProjectSection(SolutionItems) = preProject
