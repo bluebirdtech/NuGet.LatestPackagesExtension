@@ -35,9 +35,16 @@ namespace NuGet.LatestPackagesExtension.Commands
                 throw new CommandLineException();
             }
 
-            if (!File.Exists(inputPackagesConfigPath) || !File.Exists(outputPackagesConfigPath))
+            if (!File.Exists(inputPackagesConfigPath))
             {
                 throw new CommandLineException();
+            }
+
+            if(!File.Exists(outputPackagesConfigPath))
+            {
+                File.WriteAllText(outputPackagesConfigPath, @"<?xml version=""1.0"" encoding=""utf-8""?>
+<packages>
+</packages>");
             }
 
             PhysicalFileSystem outputFileSystem = new PhysicalFileSystem(Path.GetDirectoryName(outputPackagesConfigPath));
