@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
+using System.Diagnostics;
 using System.Diagnostics.Contracts;
 using System.IO;
 using System.Linq;
@@ -16,25 +17,9 @@ namespace NuGet.LatestPackagesExtension.Commands
             public static string LatestPackageReferenceFile = "latestPackages.config";
         }
 
-        private readonly List<string> _sources = new List<string>();
-
-        public IPackageRepositoryFactory RepositoryFactory { get; set; }
-        public IPackageSourceProvider SourceProvider { get; set; }
-
-        [Option("A list of sources to search")]
-        public ICollection<string> Source
-        {
-            get { return _sources; }
-        }
-
         [ImportingConstructor]
-        public UpdateLatest(IPackageRepositoryFactory packageRepositoryFactory, IPackageSourceProvider sourceProvider)
+        public UpdateLatest()
         {
-            Contract.Assert(packageRepositoryFactory != null);
-            Contract.Assert(sourceProvider != null);
-
-            RepositoryFactory = packageRepositoryFactory;
-            SourceProvider = sourceProvider;
         }
 
         /// <summary>
@@ -74,7 +59,7 @@ namespace NuGet.LatestPackagesExtension.Commands
             foreach (PackageReference packageReference in inputFile.GetPackageReferences())
             {
                 IPackage package = GetLatestPackage(packageReference.Id);
-                outputFile.AddEntry(packageReference.Id, package.Version, packageReference.TargetFramework);
+                outputFile.AddEntry(packageReference.Id, package.Version, false, packageReference.TargetFramework);
             }
         }
 
@@ -83,7 +68,7 @@ namespace NuGet.LatestPackagesExtension.Commands
             foreach (PackageSource packageSource in SourceProvider.LoadPackageSources())
             {
                 IPackageRepository repository = RepositoryFactory.CreateRepository(packageSource.Source);
-                IPackage package = repository.GetPackages().Where(p => p.IsLatestVersion && p.Id.Equals(packageId, StringComparison.OrdinalIgnoreCase)).FirstOrDefault();
+                IPackage package = repository.GetPackages().FirstOrDefault(p => p.IsLatestVersion && p.Id.Equals(packageId, StringComparison.OrdinalIgnoreCase));
                 if (package != null)
                     return package;
             }

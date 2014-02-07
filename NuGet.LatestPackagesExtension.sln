@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NuGet.LatestPackagesExtension", "NuGet.LatestPackagesExtension\NuGet.LatestPackagesExtension.csproj", "{AFB3278E-1E94-4B13-8799-64BC38852CEB}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{A6320D9C-3C7C-478E-911F-A747BD91CD53}"
@@ -8,7 +8,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{A6320D
 		.nuget\NuGet.Config = .nuget\NuGet.Config
 		.nuget\NuGet.exe = .nuget\NuGet.exe
 		.nuget\NuGet.targets = .nuget\NuGet.targets
-		.nuget\packages.config = .nuget\packages.config
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NuGet.LatestPackagesExtensionTests", "NuGet.LatestPackagesExtensionTests\NuGet.LatestPackagesExtensionTests.csproj", "{B9AE6A83-4FB1-492F-928C-03E157E9152C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{D97BCC49-2998-456C-98D5-007B0E093245}"
+	ProjectSection(SolutionItems) = preProject
+		packages\packages.config = packages\packages.config
 	EndProjectSection
 EndProject
 Global
@@ -21,6 +27,10 @@ Global
 		{AFB3278E-1E94-4B13-8799-64BC38852CEB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AFB3278E-1E94-4B13-8799-64BC38852CEB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AFB3278E-1E94-4B13-8799-64BC38852CEB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B9AE6A83-4FB1-492F-928C-03E157E9152C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B9AE6A83-4FB1-492F-928C-03E157E9152C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B9AE6A83-4FB1-492F-928C-03E157E9152C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B9AE6A83-4FB1-492F-928C-03E157E9152C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
