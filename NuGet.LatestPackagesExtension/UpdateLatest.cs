@@ -67,6 +67,8 @@ namespace NuGet.LatestPackagesExtension.Commands
         {
             foreach (PackageSource packageSource in SourceProvider.LoadPackageSources())
             {
+                if(!packageSource.IsEnabled)
+                    continue;
                 IPackageRepository repository = RepositoryFactory.CreateRepository(packageSource.Source);
                 IPackage package = repository.GetPackages().FirstOrDefault(p => p.IsLatestVersion && p.Id.Equals(packageId, StringComparison.OrdinalIgnoreCase));
                 if (package != null)
