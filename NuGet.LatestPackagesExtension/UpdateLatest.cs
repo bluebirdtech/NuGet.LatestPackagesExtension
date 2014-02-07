@@ -69,8 +69,11 @@ namespace NuGet.LatestPackagesExtension.Commands
             {
                 if(!packageSource.IsEnabled)
                     continue;
+
                 IPackageRepository repository = RepositoryFactory.CreateRepository(packageSource.Source);
-                IPackage package = repository.GetPackages().FirstOrDefault(p => p.IsLatestVersion && p.Id.Equals(packageId, StringComparison.OrdinalIgnoreCase));
+                
+                // ReSharper disable once ReplaceWithSingleCallToFirstOrDefault because FirstOrDefault is not supported on the GetPackages() implementation of IQueryable
+                IPackage package = repository.GetPackages().Where(p => p.IsLatestVersion && p.Id.Equals(packageId, StringComparison.OrdinalIgnoreCase)).FirstOrDefault();
                 if (package != null)
                     return package;
             }
