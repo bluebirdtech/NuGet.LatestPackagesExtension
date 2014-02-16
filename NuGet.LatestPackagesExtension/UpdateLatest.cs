@@ -40,6 +40,7 @@ namespace NuGet.LatestPackagesExtension.Commands
                 throw new CommandLineException();
             }
 
+            TryCreateAllDirectories(Path.GetDirectoryName(outputPackagesConfigPath));
             if(!File.Exists(outputPackagesConfigPath))
             {
                 File.WriteAllText(outputPackagesConfigPath, @"<?xml version=""1.0"" encoding=""utf-8""?>
@@ -70,7 +71,28 @@ namespace NuGet.LatestPackagesExtension.Commands
             }
         }
 
-        private IPackage GetLatestPackage(string packageId)
+        static bool TryCreateAllDirectories( string path )
+		{
+            // Normalize path
+            path = Path.GetFullPath(path);
+
+			bool createdADirectory = false;
+			string[] pathParts = path.Split( '/', '\\' );
+			string incrementalPath = "";
+			foreach( string pathPart in pathParts )
+			{
+				incrementalPath += pathPart;
+				if( pathPart != "" && !pathPart.Contains(":") && !Directory.Exists( incrementalPath ) )
+				{
+					Directory.CreateDirectory( incrementalPath );
+					createdADirectory = true;
+				}
+				incrementalPath += '/';
+			}
+			return createdADirectory;
+		}
+
+        IPackage GetLatestPackage(string packageId)
         {
             foreach (PackageSource packageSource in SourceProvider.LoadPackageSources())
             {
@@ -87,7 +109,7 @@ namespace NuGet.LatestPackagesExtension.Commands
             throw new InvalidOperationException("Package not found.");
         }
 
-        private string GetLatestPackagesConfigPath()
+        string GetLatestPackagesConfigPath()
         {
             if (Arguments.Any())
             {
@@ -101,7 +123,7 @@ namespace NuGet.LatestPackagesExtension.Commands
             return null;
         }
 
-        private string GetPackagesConfigPath()
+        string GetPackagesConfigPath()
         {
             if (Arguments.Any())
             {
