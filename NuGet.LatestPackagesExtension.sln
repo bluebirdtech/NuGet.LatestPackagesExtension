@@ -1,7 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NuGet.LatestPackagesExtension", "NuGet.LatestPackagesExtension\NuGet.LatestPackagesExtension.csproj", "{AFB3278E-1E94-4B13-8799-64BC38852CEB}"
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NuGet.LatestPackagesExtensions", "NuGet.LatestPackagesExtension\NuGet.LatestPackagesExtensions.csproj", "{AFB3278E-1E94-4B13-8799-64BC38852CEB}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{A6320D9C-3C7C-478E-911F-A747BD91CD53}"
 	ProjectSection(SolutionItems) = preProject
@@ -11,11 +13,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{A6320D
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NuGet.LatestPackagesExtensionTests", "NuGet.LatestPackagesExtensionTests\NuGet.LatestPackagesExtensionTests.csproj", "{B9AE6A83-4FB1-492F-928C-03E157E9152C}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{D97BCC49-2998-456C-98D5-007B0E093245}"
-	ProjectSection(SolutionItems) = preProject
-		packages\packages.config = packages\packages.config
-	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

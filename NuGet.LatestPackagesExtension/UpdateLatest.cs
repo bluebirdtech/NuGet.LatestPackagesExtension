@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
-using System.Diagnostics;
-using System.Diagnostics.Contracts;
 using System.IO;
 using System.Linq;
-using NuGet.Commands;
+using NuGet.CommandLine;
 
-namespace NuGet.LatestPackagesExtension.Commands
+namespace NuGet.LatestPackagesExtensions.Commands
 {
     [Command(typeof(UpdateLatestResources), "updateLatest", "UpdateLatestCommandDescription", MinArgs = 2, MaxArgs = 2, UsageSummary = "<latestPackages.config> <packages.config>")]
     public class UpdateLatest : Command
@@ -71,30 +69,30 @@ namespace NuGet.LatestPackagesExtension.Commands
             }
         }
 
-        static bool TryCreateAllDirectories( string path )
-		{
+        static bool TryCreateAllDirectories(string path)
+        {
             // Normalize path
             path = Path.GetFullPath(path);
 
-			bool createdADirectory = false;
-			string[] pathParts = path.Split( '/', '\\' );
-			string incrementalPath = "";
-			foreach( string pathPart in pathParts )
-			{
-				incrementalPath += pathPart;
-				if( pathPart != "" && !pathPart.Contains(":") && !Directory.Exists( incrementalPath ) )
-				{
-					Directory.CreateDirectory( incrementalPath );
-					createdADirectory = true;
-				}
-				incrementalPath += '/';
-			}
-			return createdADirectory;
-		}
+            var createdADirectory = false;
+            var pathParts = path.Split('/', '\\');
+            var incrementalPath = "";
+            foreach(var pathPart in pathParts)
+            {
+                incrementalPath += pathPart;
+                if(pathPart != "" && !pathPart.Contains(":") && !Directory.Exists(incrementalPath))
+                {
+                    Directory.CreateDirectory(incrementalPath);
+                    createdADirectory = true;
+                }
+                incrementalPath += '/';
+            }
+            return createdADirectory;
+        }
 
         IPackage GetLatestPackage(string packageId)
         {
-            foreach (PackageSource packageSource in SourceProvider.LoadPackageSources())
+            foreach (var packageSource in SourceProvider.LoadPackageSources())
             {
                 if(!packageSource.IsEnabled)
                     continue;
